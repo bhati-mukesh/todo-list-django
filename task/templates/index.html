@@ -1,0 +1,47 @@
+{% extends 'basic.html' %}
+{% block body %}
+<div class="container mt-5">
+<form action="addtask" method="post"> {% csrf_token %}
+  <div class="form-group">
+
+    <input type="text" class="form-control" id="task" placeholder="Enter Your Task" name="task">
+    <small id="taskHelp" class="form-text text-muted">We'll remind you to complete your task.</small>
+  </div>
+  <button type="submit" class="btn btn-primary">Add Task</button>
+</form>
+</div>
+
+
+<div class="container mt-3">
+<div class="row">
+<div class="col-6">
+Task To Be Done
+  <ul class="list-group cProductsList">
+   <li class="list-group-item d-flex justify-content-between"><p class="p-0 m-0 flex-grow-1">Task</p>  
+    <a href=""><button class="btn btn-light">Delete</button></a>  &nbsp;&nbsp; <a href=""><button class="btn btn-light">Done</button></a>
+   </li>
+    {% for item in tasks %}
+    <li class="list-group-item d-flex justify-content-between"><p class="p-0 m-0 flex-grow-1">{{item.task}}</p>  
+     <a href="taskdelete/{{item.taskID}}"><button class="btn btn-light">&#10008;</button></a>  &nbsp;&nbsp; <a href="taskdone/{{item.taskID}}"><button class="btn btn-light">&#10004;</button></a>
+    </li> 
+      {% endfor %}
+  </ul>
+</div>
+
+<div class="col-6">Completed Task
+  <ul class="list-group cProductsList">
+   <li class="list-group-item d-flex justify-content-between"><p class="p-0 m-0 flex-grow-1">Task</p>  
+    <a href=""><button class="btn btn-light">Delete</button></a>  &nbsp;&nbsp; <a href=""><button class="btn btn-light">Done</button></a>
+   </li>
+    {% for citem in ctasks %}
+    <li class="list-group-item d-flex justify-content-between"><p class="p-0 m-0 flex-grow-1">{{citem.task}}</p>  
+     <a href="taskdelete/{{citem.taskID}}"><button class="btn btn-light">&#10008;</button></a>  &nbsp;&nbsp; <a href="taskdone/{{citem.taskID}}"><button class="btn btn-light">&#10004;</button></a>
+    </li> 
+      {% endfor %}
+  </ul>
+  </div>
+</div>
+</div>
+{% endblock  %}
+
+
